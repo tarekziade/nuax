@@ -12,12 +12,12 @@ all: ;
 
 install: 
 	luarocks make
-	luarocks install JSON4Lua
-
 
 export PATH := ./lib:$(PATH)
 
 bin/nosetests:
+	luarocks install JSON4Lua
+	luarocks install json
 	$(VIRTUALENV) --no-site-packages .
 	bin/pip install git+git://github.com/tarekziade/NginxTest
 	bin/pip install nose

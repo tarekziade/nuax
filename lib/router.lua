@@ -1,5 +1,6 @@
 
-local fmwk = require "fmwk"
+local req = require "request"
+local resp = require "response"
 local json = require("json")
 
 local router = {
@@ -110,8 +111,8 @@ end
 
 
 function Router:execute(...)
-  local request = fmwk.Request.create()
-  local response = fmwk.Response.create() 
+  local request = req.Request.create()
+  local response = resp.Response.create() 
   local f, params = self:resolve(request.method, request.path, ...)
   request.urlmatch = params
 

@@ -46,13 +46,17 @@ local function match_one_path(node, path, f)
 end
 
 local function resolve(path, node, params)
-  local _, _, current_token, path = path:find("([^/.]+)(.*)")
-  if not current_token then return node["LEAF"], params end
+  local _, _, current_token, path_ = path:find("([^/.]+)(.*)")
+  if not current_token then 
+      return node["LEAF"], params 
+  end
 
   for child_token, child_node in pairs(node) do
     if child_token == current_token then
-      local f, bindings = resolve(path, child_node, params)
-      if f then return f, bindings end
+      local f, bindings = resolve(path_, child_node, params)
+      if f then 
+          return f, bindings 
+      end
     end
   end
 
@@ -116,8 +120,8 @@ function Router:execute(...)
   local f, params = self:resolve(request.method, request.path, ...)
   request.urlmatch = params
 
-  if not f then 
-      return nil, ('Could not resolve %s %s - %s'):format(method, path, params) 
+  if not f then
+      return nil, ('Could not resolve %s %s - %s'):format(request.method, request.path, params) 
   end
 
   f(request, response)
@@ -126,7 +130,7 @@ end
 
 
 function Router:main(...)
-  result, response = self:execute(...)
+  local result, response = self:execute(...)
   ngx.header.content_type = response.content_type
 
   if result then
@@ -143,9 +147,9 @@ function Router:match(method, path, f)
     method = {[method] = {[path] = f}}
   end
   for m, routes in pairs(method) do
-    for path, f in pairs(routes) do
+    for path_, f_ in pairs(routes) do
       if not self._tree[m] then self._tree[m] = {} end
-      match_one_path(self._tree[m], path, f)
+      match_one_path(self._tree[m], path_, f_)
     end
   end
 end

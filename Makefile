@@ -18,6 +18,7 @@ export PATH := ./lib:$(PATH)
 bin/nosetests:
 	luarocks install JSON4Lua
 	luarocks install json
+	luarocks install luacheck
 	$(VIRTUALENV) --no-site-packages .
 	bin/pip install git+git://github.com/tarekziade/NginxTest
 	bin/pip install nose
@@ -27,3 +28,6 @@ bin/nosetests:
 test: bin/nosetests
 	export PATH
 	bin/nosetests -sv tests
+
+check:
+	luacheck lib/*.lua

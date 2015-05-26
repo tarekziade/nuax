@@ -22,9 +22,11 @@ Example::
 
             app.main()
         '
-    }
-  }
+        }
+      }
 
+Of course you can separate the Lua code into its own module and
+use **content_by_lua_file**.
 
 To build your app, all you have to do is match a method and a path
 to a function. The function will get a request and a response

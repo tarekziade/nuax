@@ -28,10 +28,17 @@ Example::
 Of course you can separate the Lua code into its own module and
 use **content_by_lua_file**.
 
-To build your app, all you have to do is match a method and a path
-to a function. The function will get a request and a response
-object and has to fill in the json content of the response
-object (or more things if needed).
+To build your app, all you have to do is define HTTP methods
+(like **app:get()**) and routes (like "/hello/:name") combos.
 
-Nuax is based on a simple routing module found at https://docs.apitools.com/blog/2014/04/24/a-small-router-for-openresty.html
-and a few more ideas taken from the Python world.
+When app.main() is called through Nginx's root location it will
+try to find a corresponding match. If any is found, a Request
+object is built using Nginx's request environment and a Response
+object is prepared.
+
+From there, all you have to do is fill **response.json** with 
+whatever JSON data you want to send back to the user.
+
+Your Lua functions can access everything OpenResty has to offer
+of course and use whatever libraries you want.
+

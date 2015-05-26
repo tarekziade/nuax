@@ -1,0 +1,7 @@
+*.pyc
+*.un~
+.Python
+bin/
+include/
+lib/python2.7/
+man/

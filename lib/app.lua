@@ -1,15 +1,15 @@
-local nuxa = require "nuxa"
+local nuax = require "nuax"
 
 
-nuxa:get("/", function(request, response)
+nuax:get("/", function(request, response)
     response.json = {Hello= "World"} 
 end)
 
 
-nuxa:get("/hello/:name", function(request, response)
+nuax:get("/hello/:name", function(request, response)
     response.json = {Hello= request.urlmatch.name}
 end)
 
 
 
-nuxa:main()
+nuax:main()

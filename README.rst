@@ -1,8 +1,8 @@
 ====
-Nuxa
+Nuax
 ====
 
-Nuxa is a micro-framework based on OpenResty to write simple JSON web services.
+Nuax is a micro-framework based on OpenResty to write simple JSON web services.
 
 
 Example::
@@ -14,7 +14,7 @@ Example::
 
         location / {
         content_by_lua '
-            local app = require "nuxa"
+            local app = require "nuax"
 
             app:get("/hello/:name", function(request, response)
                 response.json = {Hello=request.urlmatch.name}
@@ -31,5 +31,5 @@ to a function. The function will get a request and a response
 object and has to fill in the json content of the response
 object (or more things if needed).
 
-Nuxa is based on a simple routing module found at https://docs.apitools.com/blog/2014/04/24/a-small-router-for-openresty.html
+Nuax is based on a simple routing module found at https://docs.apitools.com/blog/2014/04/24/a-small-router-for-openresty.html
 and a few more ideas taken from the Python world.

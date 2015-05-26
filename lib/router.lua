@@ -1,5 +1,7 @@
 
 local fmwk = require "fmwk"
+local json = require("json")
+
 local router = {
   _VERSION     = 'router.lua v2.1.0',
   _DESCRIPTION = 'A simple router for Lua',
@@ -124,9 +126,11 @@ end
 
 function Router:main(...)
   result, response = self:execute(...)
+  ngx.header.content_type = response.content_type
 
   if result then
     ngx.status = response.status
+    ngx.print(json.encode(response.json))
   else
     ngx.status = 404
     ngx.print("Not found!")

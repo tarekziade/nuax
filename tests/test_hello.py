@@ -21,9 +21,14 @@ class TestHello(TestMyNginx):
 
     def tearDown(self):
         self.stop_server()
-        super(TestSpecReader, self).tearDown()
+        super(TestHello, self).tearDown()
 
     def test_routing(self):
         res = self.app.get('/', headers={'User-Agent': 'Me'},
                            status=200)
-        self.assertEqual(res.body, 'yeah')
+        self.assertEqual(res.json, {'Hello': 'World'})
+
+
+        res = self.app.get('/hello/tarek', headers={'User-Agent': 'Me'},
+                           status=200)
+        self.assertEqual(res.json, {'Hello': 'tarek'})

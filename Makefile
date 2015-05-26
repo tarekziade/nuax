@@ -12,6 +12,8 @@ all: ;
 
 install: 
 	luarocks make
+	luarocks install JSON4Lua
+
 
 export PATH := ./lib:$(PATH)
 

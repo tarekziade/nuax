@@ -20,6 +20,7 @@ function Response.create()
    setmetatable(resp, Response)
    resp.json = {}
    resp.status = 200
+   resp.content_type = 'application/json'
    return resp
 end
 
